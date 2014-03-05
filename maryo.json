@@ -1,0 +1,5 @@
+{
+    "styleFormat": "less",
+    "testFramework": "jasmine",
+    "templateFormat": "dust"
+}
