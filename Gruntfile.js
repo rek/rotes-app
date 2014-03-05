@@ -24,6 +24,10 @@ module.exports = function (grunt) {
     grunt.initConfig({
         yeoman: yeomanConfig,
         watch: {
+            options: {
+                nospawn: true,
+                livereload: true
+            },
             coffee: {
                 files: 'app/scripts/{,*/}coffee/*.coffee', // match one level deep
                 tasks: "coffee"
@@ -43,14 +47,15 @@ module.exports = function (grunt) {
                     '{.tmp,app}/scripts/{,*/}*.js',
                     'app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ],
-                tasks: ['livereload']
+                tasks: ['livereload', 'jshint']
             }
         },
         connect: {
             options: {
-                port: 8888,
+                port: 1212,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                // hostname: 'localhost'
+                hostname: '0.0.0.0'
             },
             livereload: {
                 options: {
