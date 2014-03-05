@@ -4,13 +4,17 @@ define([
     "routers/router",
     "layouts/main",
     "marionette",
-    // dust,
-    // dustMarionette
+    "dustMarionette"
 ],
 
 function (_, Backbone, Router, Layout) {
 
     var App = new Backbone.Marionette.Application();
+
+
+    // An init function for your main application object
+    App.addInitializer(function () {
+        this.root = '/';
 
         // layout = new Main();
         // layout.render();
@@ -22,12 +26,7 @@ function (_, Backbone, Router, Layout) {
         // App.layout.menu.show(myMenu);
         // App.layout.content.show(myContent);
 
-
-    // An init function for your main application object
-    App.addInitializer(function () {
-        this.root = '/';
-
-        new Router();
+        // new Router();
     });
 
     //3 ways to add.
@@ -48,7 +47,7 @@ function (_, Backbone, Router, Layout) {
 
     App.on('initialize:before', function(options) {
         console.log('Initialization Started');
-        options.anotherThing = true; // Add more data to your options
+        // options.anotherThing = true; // Add more data to your options
     });
 
     App.on('initialize:after', function(options) {

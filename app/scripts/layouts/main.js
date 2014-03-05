@@ -1,10 +1,9 @@
 define([
     "underscore",
-    "backbone",
     "marionette"
 ],
 
-function (_, Backbone, Marionette) {
+function (_, Marionette) {
 
     return Backbone.Marionette.Layout.extend({
 
