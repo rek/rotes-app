@@ -4,8 +4,8 @@ define([
     "routers/router",
     "layouts/main",
     "marionette",
-    dust,
-    dustMarionette
+    // dust,
+    // dustMarionette
 ],
 
 function (_, Backbone, Router, Layout) {
@@ -17,6 +17,7 @@ function (_, Backbone, Router, Layout) {
     App.layout = new Layout();
 // var layoutRender = BBCloneMail.layout.render()
     $("body").prepend(App.layout.el);
+    App.layout.render();
 
         // App.layout.menu.show(myMenu);
         // App.layout.content.show(myContent);
