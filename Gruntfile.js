@@ -33,7 +33,7 @@ module.exports = function (grunt) {
                 tasks: "less:development"
             },
             dust: {
-                files: 'app/scripts/templates/*.dust',
+                files: 'app/scripts/templates/dust/*.dust',
                 tasks: "dustjs"
             },
             livereload: {

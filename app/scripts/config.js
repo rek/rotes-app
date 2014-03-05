@@ -21,6 +21,9 @@ requirejs.config({
         underscore: {
             exports: '_'
         },
+        dustMarionette: {
+            deps: ['backbone']
+        },
         dust: {
             exports: 'dust'
         },
