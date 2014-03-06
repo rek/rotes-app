@@ -30,15 +30,15 @@ module.exports = function (grunt) {
             },
             coffee: {
                 files: 'app/scripts/{,*/}coffee/*.coffee', // match one level deep
-                tasks: "coffee"
+                tasks: 'coffee'
             },
             less: {
                 files: 'app/styles/less/*.less',
-                tasks: "less:development"
+                tasks: 'less:development'
             },
             dust: {
                 files: 'app/scripts/templates/dust/*.dust',
-                tasks: "dustjs"
+                tasks: 'dustjs'
             },
             livereload: {
                 files: [
@@ -47,7 +47,7 @@ module.exports = function (grunt) {
                     '{.tmp,app}/scripts/{,*/}*.js',
                     'app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ],
-                tasks: ['livereload', 'jshint']
+                tasks: ['livereload'] // , 'jshint'
             }
         },
         connect: {
@@ -124,7 +124,8 @@ module.exports = function (grunt) {
                 'Gruntfile.js',
                 'app/scripts/{,*/}*.js',
                 '!app/scripts/vendor/*',
-                'test/spec/{,*/}*.js'
+                'test/spec/{,*/}*.js',
+                '!app/scripts/templates/compiled.js'
             ]
         },
         jasmine: {
@@ -138,28 +139,28 @@ module.exports = function (grunt) {
         less: {
             development: {
                 options: {
-                    paths: ["app/styles/less"], // includes path
+                    paths: ['app/styles/less'], // includes path
                     cleancss: true, // minify
                     report: 'min', // minification results
                 },
                 expand: true,
                 flatten: true,
-                cwd: "app/styles/less", // all sources relative to this path
-                src: "*.less", // source folder patterns to match, relative to cwd
-                dest: "app/styles/", // destination folder path prefix
-                ext: ".css" // replace any existing extension with this value in dest folder
+                cwd: 'app/styles/less', // all sources relative to this path
+                src: '*.less', // source folder patterns to match, relative to cwd
+                dest: 'app/styles/', // destination folder path prefix
+                ext: '.css' // replace any existing extension with this value in dest folder
             },
             production: {
                 options: {
-                    paths: ["app/styles/less"],
+                    paths: ['app/styles/less'],
                     yuicompress: true
                 },
                 expand: true,
                 flatten: true,
-                cwd: "app/styles/less", // all sources relative to this path
-                src: "*.less", // source folder patterns to match, relative to cwd
-                dest: "app/styles/", // destination folder path prefix
-                ext: ".css" // replace any existing extension with this value in dest folder
+                cwd: 'app/styles/less', // all sources relative to this path
+                src: '*.less', // source folder patterns to match, relative to cwd
+                dest: 'app/styles/', // destination folder path prefix
+                ext: '.css' // replace any existing extension with this value in dest folder
             }
         },
         requirejs: {
@@ -241,7 +242,7 @@ module.exports = function (grunt) {
         dustjs: {
             compile: {
                 files: {
-                   "app/scripts/templates/compiled.js": ["app/scripts/templates/dust/*.dust"]
+                    'app/scripts/templates/compiled.js': ['app/scripts/templates/dust/*.dust']
                 }
             }
         },
