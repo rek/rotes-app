@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                 livereload: true
             },
             coffee: {
-                files: 'app/scripts/{,*/}coffee/*.coffee', // match one level deep
+                files: 'app/scripts/coffee/{,*/}*.coffee', // match one level deep
                 tasks: 'coffee'
             },
             less: {
@@ -109,10 +109,10 @@ module.exports = function (grunt) {
         coffee: {
             glob_to_multiple: {
                 expand: true,
-                flatten: true,
-                cwd: 'app/scripts/coffee/',
-                src: ['**/*.coffee'],
-                dest: 'app/scripts/',
+                flatten: false,
+                cwd: 'app/scripts/coffee',
+                src: ['{,*/}*.coffee'],
+                dest: 'app/scripts',
                 ext: '.js'
             },
         },

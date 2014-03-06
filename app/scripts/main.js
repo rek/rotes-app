@@ -4,7 +4,9 @@ require([
     'app',
     'marionette',
     'templates',
-    'dustHelpers'
+    'dust', // perhaps not required
+    'dustMarionette',
+    'dustHelpers' // perhaps not required
 ],
 
 function ($, Backbone, App) {
@@ -14,11 +16,13 @@ function ($, Backbone, App) {
     // navigation from this instance.
     App.start();
 
-    // App.on("initialize:after", function(){
+    App.on("initialize:after", function(){
+        // App.log('test', 'App', 'dsf');
+        // console.log('(App) Initialize');
         // if (Backbone.history){
           // Backbone.history.start();
         // }
-    // });
+    });
 
     // Trigger the initial route and enable HTML5 History API support
     Backbone.history.start({ pushState: true, root: App.root });

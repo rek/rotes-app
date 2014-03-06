@@ -1,13 +1,14 @@
 define([
-    'underscore',
-    'backbone',
-    'routers/router',
-    'layouts/main',
+    // 'underscore',
+    // 'backbone',
+    // 'routers/router',
+    // 'layouts/main',
+    // 'rotes/rotes_app',
     'marionette',
-    'dustMarionette'
 ],
 
-function (_, Backbone, Router, Layout) {
+// function (_, Backbone) {
+function (Marionette) {
     'use strict';
 
     var App = new Backbone.Marionette.Application();
@@ -15,10 +16,10 @@ function (_, Backbone, Router, Layout) {
     // An init function for your main application object
     App.addInitializer(function () {
         this.root = '/';
-
-        App.layout = new Layout();
-        $('body').prepend(App.layout.el);
-        App.layout.render();
+        // App.switchApp('RotesApp');
+        // App.layout = new Layout();
+        // $('body').prepend(App.layout.el);
+        // App.layout.render();
 
         // App.layout.menu.show(myMenu);
         // new Router();
@@ -47,9 +48,43 @@ function (_, Backbone, Router, Layout) {
 
     App.on('initialize:after', function (options) {
         console.log('Initialization Finished');
+
+        if(Backbone.history){
+            require(["rotes/rotes_app"], function () {
+                // Backbone.history.start();
+
+                App.switchApp("RotesApp", {});
+            });
+        }
+
+
     });
 
-    // Return the instantiated app (there should only be one)
+    App.switchApp = function(appName, args){
+        var currentApp = App.module(appName);
+        if (App.currentApp === currentApp){ return; }
+
+        if (App.currentApp){
+            App.currentApp.stop();
+        }
+
+        App.currentApp = currentApp;
+        currentApp.start(args);
+    };
+
+    /**
+    * Log function.
+    * Pass all messages through here so we can disable for prod
+    */
+    App.log = function(message, domain){
+        if(typeof message !== "string"){
+            console.log('Fancy object in log msg, implemoent this plz');
+        } else {
+            console.log((domain || false ? '('+domain+') ' : '') + message);
+        }
+    };
+
+    // Return the instantiated App (there should only be one)
     return App;
 
 });
