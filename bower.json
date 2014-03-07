@@ -9,12 +9,10 @@
     "backbone.eventbinder": "1.0.2",
     "backbone.babysitter": "0.1.0",
     "lodash": "~1.3.1",
-    "jquery": "2.0.0",
-    "dustjs-linkedin": "2.0.2",
-    "dustjs-linkedin-helpers": "1.1.1",
-    "marionette-dust": "0.1.6"
+    "jquery": "~1.11.0",
+    "dustjs-linkedin": "~2.0.0",
+    "dustjs-linkedin-helpers": "~1.1.0",
+    "marionette-dust": "~0.1.4"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }

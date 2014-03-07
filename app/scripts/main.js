@@ -12,17 +12,16 @@ require([
 function ($, Backbone, App) {
     'use strict';
 
-    // Define your master router on the application namespace and trigger all
-    // navigation from this instance.
-    App.start();
-
+    // any extras?
     App.on("initialize:after", function(){
-        App.log('testaa', 'App', 'dsf');
-        // console.log('(App) Initialize');
         // if (Backbone.history){
           // Backbone.history.start();
         // }
     });
+
+    // Define your master router on the application namespace and trigger all
+    // navigation from this instance.
+    App.start();
 
 
     // All navigation that is relative should be passed through the navigate

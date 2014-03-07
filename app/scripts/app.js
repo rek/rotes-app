@@ -57,14 +57,13 @@ function (Marionette) {
     };
 
     App.on('initialize:before', function (options) {
-        App.log('Initialization Started');
+        App.log('Initialization Started', 'App', 2);
         // options.anotherThing = true; // Add more data to your options
     });
 
     App.on('initialize:after', function (options) {
-        App.log('Initialization Finished');
-
         if(Backbone.history){
+            // note: this is async, so the rest of the init code here will run first
             require(["rotes/rotes_app"], function () {
                 // Backbone.history.start();
                 // Trigger the initial route and enable HTML5 History API support
@@ -74,11 +73,16 @@ function (Marionette) {
             });
         }
 
-
+        App.log('Initialization Finished', 'App', 2);
     });
 
+    /**
+     * App changer
+     */
     App.switchApp = function(appName, args){
-        var currentApp = App.module(appName);
+        App.log('Switching to: ' + appName, 'App', 1);
+        // do not initalise a new module if no name is given
+        var currentApp = appName ? App.module(appName) : null;
         if (App.currentApp === currentApp){ return; }
 
         if (App.currentApp){
@@ -86,13 +90,15 @@ function (Marionette) {
         }
 
         App.currentApp = currentApp;
-        currentApp.start(args);
+        if(currentApp){
+          currentApp.start(args);
+        }
     };
 
     /**
-    * Log function.
-    * Pass all messages through here so we can disable for prod
-    */
+     * Log function.
+     * Pass all messages through here so we can disable for prod
+     */
     App.log = function(message, domain, level){
         if(App.debug < level) { return; }
         if(typeof message !== "string"){
