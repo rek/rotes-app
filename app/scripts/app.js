@@ -13,8 +13,14 @@ function (Marionette) {
 
     var App = new Backbone.Marionette.Application();
 
+    App.addRegions({
+        headerRegion: "#header-region",
+        mainRegion:   "#main-region",
+    });
+
     // An init function for your main application object
     App.addInitializer(function () {
+        this.debug = 2;
         this.root = '/';
         // App.switchApp('RotesApp');
         // App.layout = new Layout();
@@ -41,17 +47,28 @@ function (Marionette) {
 
     });
 
+    App.navigate = function(route,  options){
+        options || (options = {});
+        Backbone.history.navigate(route, options);
+    };
+
+    App.getCurrentRoute = function(){
+        return Backbone.history.fragment
+    };
+
     App.on('initialize:before', function (options) {
-        console.log('Initialization Started');
+        App.log('Initialization Started');
         // options.anotherThing = true; // Add more data to your options
     });
 
     App.on('initialize:after', function (options) {
-        console.log('Initialization Finished');
+        App.log('Initialization Finished');
 
         if(Backbone.history){
             require(["rotes/rotes_app"], function () {
                 // Backbone.history.start();
+                // Trigger the initial route and enable HTML5 History API support
+                Backbone.history.start({ pushState: true, root: App.root });
 
                 App.switchApp("RotesApp", {});
             });
@@ -76,9 +93,10 @@ function (Marionette) {
     * Log function.
     * Pass all messages through here so we can disable for prod
     */
-    App.log = function(message, domain){
+    App.log = function(message, domain, level){
+        if(App.debug < level) { return; }
         if(typeof message !== "string"){
-            console.log('Fancy object in log msg, implemoent this plz');
+            console.log('Fancy object in log msg, implemoent this plz', message);
         } else {
             console.log((domain || false ? '('+domain+') ' : '') + message);
         }

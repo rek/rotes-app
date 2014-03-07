@@ -17,15 +17,13 @@ function ($, Backbone, App) {
     App.start();
 
     App.on("initialize:after", function(){
-        // App.log('test', 'App', 'dsf');
+        App.log('testaa', 'App', 'dsf');
         // console.log('(App) Initialize');
         // if (Backbone.history){
           // Backbone.history.start();
         // }
     });
 
-    // Trigger the initial route and enable HTML5 History API support
-    Backbone.history.start({ pushState: true, root: App.root });
 
     // All navigation that is relative should be passed through the navigate
     // method, to be processed by the router. If the link has a `data-bypass`
