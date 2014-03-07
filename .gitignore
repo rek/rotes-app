@@ -6,3 +6,4 @@ build
 app/bower_components
 .tmp/
 *.sublime-*
+*compiled.js

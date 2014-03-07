@@ -37,7 +37,7 @@ module.exports = function (grunt) {
                 tasks: 'less:development'
             },
             dust: {
-                files: 'app/scripts/templates/dust/*.dust',
+                files: 'app/scripts/common/templates-raw/*.dust',
                 tasks: 'dustjs'
             },
             livereload: {
@@ -242,7 +242,7 @@ module.exports = function (grunt) {
         dustjs: {
             compile: {
                 files: {
-                    'app/scripts/templates/compiled.js': ['app/scripts/templates/dust/*.dust']
+                    'app/scripts/common/templates.js': ['app/scripts/common/templates-raw/*.dust']
                 }
             }
         },
