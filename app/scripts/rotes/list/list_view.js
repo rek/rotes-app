@@ -1,19 +1,118 @@
-App.module("RotesApp.List", function (List, App, Backbone, Marionette, $, _) {
+define(["app"], function (App) {
+  App.module("RotesApp.List.View", function (View, App, Backbone, Marionette, $, _) {
+    View.Layout = Marionette.Layout.extend({
+      template: 'appSkeleton',
 
-  List.Rote = Marionette.ItemView.extend({
-    template: "rote",
-    tagName: "li",
+      regions: {
+        panelRegion: "#panel-region",
+        rotesRegion: "#content"
+      }
+    });
 
-  //   triggers: {
-  //     "click": "selected"
-  //   }
+    // View.Panel = Marionette.ItemView.extend({
+    //   template: panelTpl,
+
+    //   triggers: {
+    //     "click button.js-new": "contact:new"
+    //   },
+
+    //   events: {
+    //     "submit #filter-form": "filterContacts"
+    //   },
+
+    //   ui: {
+    //     criterion: "input.js-filter-criterion"
+    //   },
+
+    //   filterContacts: function(e){
+    //     e.preventDefault();
+    //     var criterion = this.$(".js-filter-criterion").val();
+    //     this.trigger("contacts:filter", criterion);
+    //   },
+
+    //   onSetFilterCriterion: function(criterion){
+    //     this.ui.criterion.val(criterion);
+    //   }
+    // });
+
+    View.Rote = Marionette.ItemView.extend({
+      tagName: "tr",
+      template: 'rote',
+
+      events: {
+        "click": "highlightName",
+        "click td a.js-show": "showClicked",
+        "click td a.js-edit": "editClicked",
+        "click button.js-delete": "deleteClicked"
+      },
+
+      flash: function(cssClass){
+        var $view = this.$el;
+        $view.hide().toggleClass(cssClass).fadeIn(800, function(){
+          setTimeout(function(){
+            $view.toggleClass(cssClass)
+          }, 500);
+        });
+      },
+
+      highlightName: function(e){
+        this.$el.toggleClass("warning");
+      },
+
+      showClicked: function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        this.trigger("contact:show", this.model);
+      },
+
+      editClicked: function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        this.trigger("contact:edit", this.model);
+      },
+
+      deleteClicked: function(e){
+        e.stopPropagation();
+        this.trigger("contact:delete", this.model);
+      },
+
+      remove: function(){
+        var self = this;
+        this.$el.fadeOut(function(){
+          Marionette.ItemView.prototype.remove.call(self);
+        });
+      }
+    });
+
+    var NoRotesView = Marionette.ItemView.extend({
+      template: 'none',
+      tagName: "tr",
+      className: "alert"
+    });
+
+    View.Rotes = Marionette.CompositeView.extend({
+      tagName: "table",
+      className: "table table-hover",
+      template: 'rotes',
+      emptyView: NoRotesView,
+      itemView: View.Rote,
+      itemViewContainer: "tbody",
+
+      initialize: function(){
+        this.listenTo(this.collection, "reset", function(){
+          this.appendHtml = function(collectionView, itemView, index){
+            collectionView.$el.append(itemView.el);
+          }
+        });
+      },
+
+      onCompositeCollectionRendered: function(){
+        this.appendHtml = function(collectionView, itemView, index){
+          collectionView.$el.prepend(itemView.el);
+        }
+      }
+    });
   });
 
-  List.Rotes = Marionette.CollectionView.extend({
-    tagName: "ul",
-    className: "rote-list",
-    itemViewEventPrefix: "rote",
-    itemView: List.Rote
-  });
-
+  return App.RotesApp.List.View;
 });

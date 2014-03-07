@@ -16,29 +16,21 @@ function (Marionette) {
     App.addRegions({
         headerRegion: "#header-region",
         mainRegion:   "#main-region",
+        // same as:
+        // App.container = new Backbone.Marionette.Region({el:"#main"});
     });
 
     // An init function for your main application object
     App.addInitializer(function () {
-        this.debug = 2;
-        this.root = '/';
-        // App.switchApp('RotesApp');
+        this.debug = 1;
+        this.root = 'rotes-app/';
+
         // App.layout = new Layout();
         // $('body').prepend(App.layout.el);
         // App.layout.render();
-
         // App.layout.menu.show(myMenu);
-        // new Router();
     });
 
-    //3 ways to add.
-    // App.addRegions({
-        // mainRegion: "#main"
-        // same as:
-        // App.container = new Backbone.Marionette.Region({el:"#main"});
-    // });
-
-    // region.show(new MyView());
     // Close out the view and display nothing in #container.
     // region.close();
 
@@ -53,7 +45,8 @@ function (Marionette) {
     };
 
     App.getCurrentRoute = function(){
-        return Backbone.history.fragment
+        // App.log('Get current rote', 'App', 2);
+        return Backbone.history.fragment;
     };
 
     App.on('initialize:before', function (options) {
@@ -69,7 +62,7 @@ function (Marionette) {
                 // Trigger the initial route and enable HTML5 History API support
                 Backbone.history.start({ pushState: true, root: App.root });
 
-                App.switchApp("RotesApp", {});
+                // App.switchApp("RotesApp", {});
             });
         }
 
@@ -85,12 +78,12 @@ function (Marionette) {
         var currentApp = appName ? App.module(appName) : null;
         if (App.currentApp === currentApp){ return; }
 
-        if (App.currentApp){
+        if (App.currentApp) {
             App.currentApp.stop();
         }
 
         App.currentApp = currentApp;
-        if(currentApp){
+        if (currentApp) {
           currentApp.start(args);
         }
     };
