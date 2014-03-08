@@ -1,4 +1,5 @@
-define(['app'], function(App){
+define(['app', 'modules/rotes/config'], function(App){
+
     // create a new module
     App.module('RotesApp', {
         startWithParent: false,
@@ -13,18 +14,7 @@ define(['app'], function(App){
         }
     });
 
-  // App.module("RotesApp", function(RotesApp, App, Backbone, Marionette, $, _){
-  //   RotesApp.startWithParent = false;
-
-  //   RotesApp.onStart = function(){
-  //     console.log("starting RotesApp");
-  //   };
-
-  //   RotesApp.onStop = function(){
-  //     console.log("stopping RotesApp");
-  //   };
-  // });
-
+    // create a new sub module
     App.module("Routers.RotesApp", function(RotesAppRouter, App, Backbone, Marionette, $, _){
         this.name = 'Routers.RotesApp';
 
@@ -51,14 +41,14 @@ define(['app'], function(App){
         var API = {
             listRotes: function(){
                 App.log('List rotes', RotesAppRouter.name, 2);
-                require(["rotes/list/list_controller"], function(ListController){
+                require(['list_controller'], function(ListController){
                     App.log('List rotes: Controller loaded', RotesAppRouter.name);
                     executeAction(ListController.listRotes);
                 });
             },
             showRote: function (slug) {
                 App.log('showing all rotes', RotesAppRouter.name);
-                require(["rotes/show/show_controller"], function(ShowController){
+                require(['show_controller'], function(ShowController){
                     App.log('showing all rotes', RotesAppRouter.name);
                     executeAction(ShowController.showRote, slug);
                 });
