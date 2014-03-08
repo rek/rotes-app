@@ -1,3 +1,35 @@
 ## Rotes App.
 
 A Backbone + Marionette + RequireJs + Dust learning exercise.
+
+This is the directory structure:
+
+App
++-- Styles
+|   + -- less
+|   |    | -- *.css
+|   | -- main.js (compiled)
+|   | -- normalize.js
++-- Images
+|   | -- **
++-- Scripts
+|   + -- Common
+|   |    + -- templates
+|   |    |    | -- templates.js (compiled)
+|   |    |    | -- views.js
+|   + -- Modules
+|   |    + -- ModuleName
+|   |   |    + -- entities
+|   |   |    + -- list
+|   |   |    |    | -- list_controller.js
+|   |   |    |    | -- list_view.js
+|   |   |    + -- show
+|   |   |    + -- templates
+|   |   |    |    | -- modulename_layout.dust
+|   |   |    |    | -- modulename_list.dust
+|   |   |    | -- app.js
+|   |   |    | -- config.js
+|   + -- Test <--- NOTE PERHAPS MOVE INTO MODULES TOO
+| -- app.js
+| -- main.js   (app init and other browser setup)
+| -- config.js (requirejs)
