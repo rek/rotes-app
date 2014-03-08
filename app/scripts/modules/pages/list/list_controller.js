@@ -1,32 +1,32 @@
 define(["app", "pages_list_view"], function(App, View){
-  App.module("HeaderApp.List", function(List, App, Backbone, Marionette, $, _){
+  App.module("PageApp.List", function(List, App, Backbone, Marionette, $, _){
     List.Controller = {
-      listHeader: function(){
+      listPage: function(){
         require(["pages_entities_page"], function(){
-          var links = App.request("header:entities");
-          var headers = new View.Headers({collection: links});
+          var links = App.request("page:entities");
+          var pages = new View.Pages({collection: links});
 
-          headers.on("brand:clicked", function(){
-            App.trigger("contacts:list");
+          pages.on("brand:clicked", function(){
+            App.trigger("pages:list");
           });
 
-          headers.on("itemview:navigate", function(childView, model){
+          pages.on("itemview:navigate", function(childView, model){
             var trigger = model.get("navigationTrigger");
             App.trigger(trigger);
           });
 
-          App.headerRegion.show(headers);
+          App.pageRegion.show(pages);
         });
       },
 
-      setActiveHeader: function(headerUrl){
-        var links = App.request("header:entities");
-        var headerToSelect = links.find(function(header){ return header.get("url") === headerUrl; });
-        headerToSelect.select();
+      setActivePage: function(pageUrl){
+        var links = App.request("page:entities");
+        var pageToSelect = links.find(function(page){ return page.get("url") === pageUrl; });
+        pageToSelect.select();
         links.trigger("reset");
       }
     };
   });
 
-  return App.HeaderApp.List.Controller;
+  return App.PageApp.List.Controller;
 });
