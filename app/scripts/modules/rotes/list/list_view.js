@@ -1,7 +1,7 @@
 define(["app"], function (App) {
   App.module("RotesApp.List.View", function (View, App, Backbone, Marionette, $, _) {
     View.Layout = Marionette.Layout.extend({
-      template: 'layout',
+      template: 'rotes_layout',
 
       regions: {
         panelRegion: "#panel-region",
@@ -37,7 +37,7 @@ define(["app"], function (App) {
 
     View.Rote = Marionette.ItemView.extend({
       tagName: "tr",
-      template: 'rote',
+      template: 'rotes_list_one',
 
       events: {
         "click": "highlightName",
@@ -85,7 +85,7 @@ define(["app"], function (App) {
     });
 
     var NoRotesView = Marionette.ItemView.extend({
-      template: 'none',
+      template: 'rotes_none',
       tagName: "tr",
       className: "alert"
     });
@@ -93,7 +93,7 @@ define(["app"], function (App) {
     View.Rotes = Marionette.CompositeView.extend({
       tagName: "table",
       className: "table table-hover",
-      template: 'rotes',
+      template: 'rotes_list',
       emptyView: NoRotesView,
       itemView: View.Rote,
       itemViewContainer: "tbody",
