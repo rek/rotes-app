@@ -1,0 +1,5 @@
+<ul>
+  {#rotes}
+    <li {@eq key=id value=selected}  selected='true'{/eq}>{name}</li>{~n}
+  {/rotes}
+</ul>

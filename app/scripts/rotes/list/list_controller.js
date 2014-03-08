@@ -8,18 +8,35 @@ define(["app", "rotes/list/list_view"], function (App, View) {
             template: 'loading',
           });
           var loadingView = new Loading();
+          App.mainRegion.show(loadingView);
+
           var fetchingRotes = App.request("rote:entities");
 
-          // var contactsListLayout = new View.Layout();
-          // var contactsListPanel = new View.Panel();
+          var rotesListLayout = new View.Layout();
+          // var rotesListPanel = new View.Panel();
 
           // require(["entities/common"], function(FilteredCollection){
             $.when(fetchingRotes).done(function(rotes){
-              App.log('fetched', 'App', 1);
+              App.log('fetched rotes datas', 'App', 1);
+
+              var rotesListView = new View.Rotes({
+                collection: rotes
+              });
+
+              rotesListLayout.on("show", function(){
+                // rotesListLayout.panelRegion.show(contactsListPanel);
+                rotesListLayout.rotesRegion.show(rotesListView);
+              });
+
+              rotesListView.on("itemview:contact:show", function(childView, model){
+                // App.trigger("rotes:show", model.get("id"));
+              });
+
+              // when its all setup, tigger show
+              App.mainRegion.show(rotesListLayout);
+
             });
 
-          App.mainRegion.show(loadingView);
-          // App.mainRegion.show(contactsListLayout);
         });
       }
     }

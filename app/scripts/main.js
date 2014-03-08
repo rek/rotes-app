@@ -4,9 +4,9 @@ require([
     'app',
     'marionette',
     'templates',
-    'dust', // perhaps not required
-    'dustMarionette',
-    'dustHelpers' // perhaps not required
+    // 'dust', // perhaps not required
+    // 'dustMarionette',
+    // 'dustHelpers' // perhaps not required
 ],
 
 function ($, Backbone, App) {

@@ -100,6 +100,7 @@ define(["app"], function (App) {
 
       initialize: function(){
         this.listenTo(this.collection, "reset", function(){
+          App.log('reset called', 'rotes view', 1);
           this.appendHtml = function(collectionView, itemView, index){
             collectionView.$el.append(itemView.el);
           }
@@ -107,6 +108,7 @@ define(["app"], function (App) {
       },
 
       onCompositeCollectionRendered: function(){
+        App.log('rendered called', 'rotes view', 1);
         this.appendHtml = function(collectionView, itemView, index){
           collectionView.$el.prepend(itemView.el);
         }

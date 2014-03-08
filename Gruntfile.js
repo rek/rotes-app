@@ -44,7 +44,8 @@ module.exports = function (grunt) {
                 files: [
                     'app/*.html',
                     '{.tmp,app}/styles/{,*/}*.css',
-                    '{.tmp,app}/scripts/{,*/}*.js',
+                    '{.tmp,app}/scripts/rotes/{,*/}*.js',
+                    '{.tmp,app}/scripts/common/{,*/}*.js',
                     'app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ],
                 tasks: ['livereload'] // , 'jshint'
@@ -223,8 +224,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     'build/styles/main.css': [
-                        '.tmp/styles/{,*/}*.css',
-                        'app/styles/{,*/}*.css'
+                        'app/styles/*.css'
                     ]
                 }
             }
