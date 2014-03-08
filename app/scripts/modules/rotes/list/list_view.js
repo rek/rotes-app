@@ -1,7 +1,7 @@
 define(["app"], function (App) {
   App.module("RotesApp.List.View", function (View, App, Backbone, Marionette, $, _) {
     View.Layout = Marionette.Layout.extend({
-      template: 'appSkeleton',
+      template: 'layout',
 
       regions: {
         panelRegion: "#panel-region",
@@ -100,7 +100,7 @@ define(["app"], function (App) {
 
       initialize: function(){
         this.listenTo(this.collection, "reset", function(){
-          App.log('reset called', 'rotes view', 1);
+          App.log('reset called', 'rotes list view', 1);
           this.appendHtml = function(collectionView, itemView, index){
             collectionView.$el.append(itemView.el);
           }
@@ -108,7 +108,7 @@ define(["app"], function (App) {
       },
 
       onCompositeCollectionRendered: function(){
-        App.log('rendered called', 'rotes view', 1);
+        App.log('rendered called', 'rotes list view', 1);
         this.appendHtml = function(collectionView, itemView, index){
           collectionView.$el.prepend(itemView.el);
         }
