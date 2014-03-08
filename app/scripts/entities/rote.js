@@ -85,7 +85,10 @@ define(["app"], function(App){
           if(rotes.length === 0){
             // if we don't have any rotes yet, create some for convenience
             var models = initializeRotes();
-            rotes.reset(models);
+            setTimeout(function(){
+              rotes.reset(models);
+            }, 2000);
+
           }
         });
         return promise;

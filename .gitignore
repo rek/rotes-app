@@ -4,6 +4,7 @@ dist
 build
 .sass-cache
 app/bower_components
+app/scripts/common/templates.js
 .tmp/
 *.sublime-*
 *compiled.js

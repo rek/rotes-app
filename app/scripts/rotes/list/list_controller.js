@@ -2,13 +2,9 @@ define(["app", "rotes/list/list_view"], function (App, View) {
   App.module("RotesApp.List", function (List, App, Backbone, Marionette, $, _) {
     List.Controller = {
       listRotes: function () {
-        require(["entities/rote"], function(){
-        // require(["common/views", "entities/contact"], function(CommonViews){
-          var Loading = Marionette.ItemView.extend({
-            template: 'loading',
-          });
-          var loadingView = new Loading();
-          App.mainRegion.show(loadingView);
+        require(["common/views", "entities/rote"], function(CommonViews){
+
+          App.mainRegion.show(new CommonViews.Loading());
 
           var fetchingRotes = App.request("rote:entities");
 
