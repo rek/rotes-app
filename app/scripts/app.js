@@ -57,7 +57,7 @@ function (Marionette) {
     App.on('initialize:after', function (options) {
         if(Backbone.history){
             // note: this is async, so the rest of the init code here will run first
-            require(["modules/rotes/app"], function () {
+            require(["modules/rotes/app", "modules/pages/app"], function () {
                 // Backbone.history.start();
                 // Trigger the initial route and enable HTML5 History API support
                 Backbone.history.start({ pushState: true, root: App.root });
