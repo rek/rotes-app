@@ -1,5 +1,7 @@
 define(["app", "backbone.picky"], function(App){
+
   var contextName = 'Entity Page';
+
   App.module("Entities", function(Entities, App, Backbone, Marionette, $, _){
     Entities.Page = Backbone.Model.extend({
       initialize: function(){

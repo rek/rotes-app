@@ -1,22 +1,20 @@
-define(['app', 'pages_list_view'], function(App, View){
+define(['app', 'pages_list_view', 'pages_entities_page'], function(App, View){
   App.module('PageApp.List', function(List, App, Backbone, Marionette, $, _){
     List.Controller = {
-      listPage: function(){
-        require(['pages_entities_page'], function(){
-          var links = App.request('page:entities');
-          var pages = new View.Pages({collection: links});
+      listPages: function(){
+        var links = App.request('page:entities');
+        var pages = new View.Pages({collection: links});
 
-          pages.on('brand:clicked', function(){
-            App.trigger('pages:list');
-          });
-
-          pages.on('itemview:navigate', function(childView, model){
-            var trigger = model.get('navigationTrigger');
-            App.trigger(trigger);
-          });
-
-          App.pageRegion.show(pages);
+        pages.on('brand:clicked', function(){
+          App.trigger('pages:list');
         });
+
+        pages.on('itemview:navigate', function(childView, model){
+          var trigger = model.get('navigationTrigger');
+          App.trigger(trigger);
+        });
+
+        App.pageRegion.show(pages);
       },
 
       setActivePage: function(pageUrl){
