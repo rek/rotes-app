@@ -1,14 +1,16 @@
 define(["app", "backbone.picky"], function(App){
+  var contextName = 'Entity Page';
   App.module("Entities", function(Entities, App, Backbone, Marionette, $, _){
-    Entities.Header = Backbone.Model.extend({
+    Entities.Page = Backbone.Model.extend({
       initialize: function(){
+        App.log('Init', contextName, 2);
         var selectable = new Backbone.Picky.Selectable(this);
         _.extend(this, selectable);
       }
     });
 
-    Entities.HeaderCollection = Backbone.Collection.extend({
-      model: Entities.Header,
+    Entities.PageCollection = Backbone.Collection.extend({
+      model: Entities.Page,
 
       initialize: function(){
         var singleSelect = new Backbone.Picky.SingleSelect(this);
@@ -16,24 +18,26 @@ define(["app", "backbone.picky"], function(App){
       }
     });
 
-    var initializeHeaders = function(){
-      Entities.headers = new Entities.HeaderCollection([
-        { name: "Contacts", url: "contacts", navigationTrigger: "contacts:list" },
-        { name: "About", url: "about", navigationTrigger: "about:show" }
+    var initializePages = function(){
+      App.log('Init Pages Collection', contextName, 2);
+      Entities.Pages = new Entities.PageCollection([
+        { name: "Rotes", url: "rotes", navigationTrigger: "rotes:list" },
+        // { name: "About", url: "about", navigationTrigger: "about:show" }
       ]);
     };
 
     var API = {
-      getHeaders: function(){
-        if(Entities.headers === undefined){
-          initializeHeaders();
+      getPages: function(){
+        if(Entities.Pages === undefined){
+          initializePages();
         }
-        return Entities.headers;
+        App.log('Returning Pages', contextName, 1);
+        return Entities.Pages;
       }
     };
 
-    App.reqres.setHandler("header:entities", function(){
-      return API.getHeaders();
+    App.reqres.setHandler("page:entities", function(){
+      return API.getPages();
     });
   });
 

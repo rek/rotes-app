@@ -1,17 +1,17 @@
 define(["app", "modules/pages/config"], function(App){
 
-  App.module("HeaderApp", function(Header, App, Backbone, Marionette, $, _, ListController){
+  App.module("PageApp", function(Header, App, Backbone, Marionette, $, _, ListController){
     var API = {
       listHeader: function(){
         require(['pages_list_controller'], function(ListController){
-          ListController.listHeader();
+          ListController.listPage();
         });
       }
     };
 
-    App.commands.setHandler("set:active:header", function(name){
+    App.commands.setHandler("set:active:page", function(name){
       require(['pages_list_controller'], function(ListController){
-        ListController.setActiveHeader(name);
+        ListController.setActivePage(name);
       });
     });
 

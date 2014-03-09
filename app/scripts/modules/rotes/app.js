@@ -35,7 +35,7 @@ define(['app', 'modules/rotes/config'], function(App){
         var executeAction = function(action, arg){
             App.switchApp("RotesApp");
             action(arg);
-            // App.execute("set:active:header", "contacts");
+            App.execute("set:active:page", "rotes");
         };
 
         var API = {

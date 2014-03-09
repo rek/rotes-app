@@ -1,5 +1,6 @@
 define(["app"], function(App){
   App.module("Entities", function(Entities, App, Backbone, Marionette, $, _){
+    var contextName = 'Entity Rote';
     Entities.Rote = Backbone.Model.extend({
       urlRoot: "rotes",
 
@@ -8,8 +9,8 @@ define(["app"], function(App){
         slug: ""
       },
 
-    //   validate: function(attrs, options) {
-    //     var errors = {}
+      validate: function(attrs, options) {
+        var errors = {}
     //     if (! attrs.firstName) {
     //       errors.firstName = "can't be blank";
     //     }
@@ -24,7 +25,7 @@ define(["app"], function(App){
     //     if( ! _.isEmpty(errors)){
     //       return errors;
     //     }
-    //   }
+      }
     });
 
     // Entities.configureStorage(Entities.Contact);
@@ -38,7 +39,7 @@ define(["app"], function(App){
     // Entities.configureStorage(Entities.ContactCollection);
 
     var initializeRotes = function(){
-      App.log('setting up rotes', 'this.name', 1);
+      App.log('Rotes init', contextName, 1);
       // var contacts = new Entities.ContactCollection([
         // { id: 1, firstName: "Alice", lastName: "Arten", phoneNumber: "555-0184" },
         // { id: 2, firstName: "Bob", lastName: "Brigham", phoneNumber: "555-0163" },
@@ -67,12 +68,12 @@ define(["app"], function(App){
 
     var API = {
       getRoteEntities: function(){
-        App.log('getRotes called', 'rote entitie', 1);
+        App.log('getRotes called', contextName, 1);
         var rotes = new Entities.RoteCollection();
         var defer = $.Deferred();
         rotes.fetch({
           complete: function(data){
-            App.log('fake datas', 'rote ent', 1);
+            App.log('fake datas', contextName, 1);
             defer.resolve(rotes);
           },
           success: function(data){
@@ -81,7 +82,7 @@ define(["app"], function(App){
         });
         var promise = defer.promise();
         $.when(promise).done(function(rotes){
-          App.log('promise running: ' + rotes.length, 'rote ent', 1);
+          App.log('promise running: ' + rotes.length, contextName, 1);
           if(rotes.length === 0){
             // if we don't have any rotes yet, create some for convenience
             var models = initializeRotes();

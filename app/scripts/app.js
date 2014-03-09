@@ -14,7 +14,7 @@ function (Marionette) {
     var App = new Backbone.Marionette.Application();
 
     App.addRegions({
-        headerRegion: "#header-region",
+        pageRegion:   "#page-region",
         mainRegion:   "#main-region",
         // same as:
         // App.container = new Backbone.Marionette.Region({el:"#main"});
