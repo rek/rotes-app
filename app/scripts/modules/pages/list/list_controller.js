@@ -18,10 +18,10 @@ define(['app', 'pages_list_view', 'pages_entities_page'], function(App, View){
       },
 
       setActivePage: function(pageUrl){
-        var links = App.request('page:entities');
+        // var links = App.request('page:entities');
         // var pageToSelect = links.find(function(page){ return page.get('url') === pageUrl; });
         // pageToSelect.select();
-        links.trigger('reset');
+        // links.trigger('reset');
       }
     };
   });
