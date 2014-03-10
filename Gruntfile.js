@@ -18,7 +18,7 @@ module.exports = function (grunt) {
     // configurable paths
     var yeomanConfig = {
         app: 'app',
-        dist: 'dist'
+        dist: 'build'
     };
 
     grunt.initConfig({
@@ -97,11 +97,6 @@ module.exports = function (grunt) {
                 path: 'http://localhost:8888'
             }
         },
-        // bootstrap: {
-            // files: {
-              // 'app/styles/bootstrap.css': 'app/styles/less/manifest.less',
-            // },
-        // },
         clean: {
             dist: {
                 files: [{
@@ -182,6 +177,9 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     baseUrl: 'app/scripts',
+                    out: 'build/scripts/app.js',
+                    mainConfigFile: "app/scripts/config.js",
+                    name: "../../node_modules/almond/almond",
                     optimize: 'none',
                     preserveLicenseComments: false,
                     useStrict: true,
@@ -237,10 +235,26 @@ module.exports = function (grunt) {
         cssmin: {
             dist: {
                 files: {
-                    'app/styles/main.min.css': [
+                    'build/styles/main.min.css': [
                         'app/styles/*.css'
                     ]
                 }
+            }
+        },
+        concat: {
+            dist: {
+            }
+        },
+        uglify: {
+            options: {
+              mangle: {
+                // except: ['jQuery', 'Backbone']
+              }
+            },
+            dist: {
+                  files: {
+                    'build/scripts/app.min.js': ['build/scripts/app.js']
+                  }
             }
         },
         htmlmin: {
