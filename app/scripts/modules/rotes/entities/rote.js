@@ -77,16 +77,18 @@ define(["app"], function(App){
             defer.resolve(rotes);
           },
           success: function(data){
+            App.log('success data', contextName, 1);
             defer.resolve(data);
           }
         });
         var promise = defer.promise();
         $.when(promise).done(function(rotes){
           App.log('promise running: ' + rotes.length, contextName, 1);
-          if(rotes.length === 0){
+          if (rotes.length === 0) {
             // if we don't have any rotes yet, create some for convenience
             var models = initializeRotes();
-            setTimeout(function(){
+            setTimeout(function () {
+              App.trigger('page:register', models); // add each rote to the menu
               rotes.reset(models);
             }, 2000);
 

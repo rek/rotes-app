@@ -40,9 +40,8 @@ define(['app', 'modules/rotes/config'], function(App){
 
         var API = {
             listRotes: function(){
-                App.log('List rotes', RotesAppRouter.name, 2);
                 require(['list_controller'], function(ListController){
-                    App.log('List rotes: Controller loaded', RotesAppRouter.name);
+                    App.log('List rotes: Controller loaded, requesting rotes..', RotesAppRouter.name, 2);
                     executeAction(ListController.listRotes);
                 });
             },

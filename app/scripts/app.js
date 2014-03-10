@@ -4,7 +4,7 @@ define([
     // 'routers/router',
     // 'layouts/main',
     // 'rotes/rotes_app',
-    'marionette',
+    'marionette'
 ],
 
 // function (_, Backbone) {
@@ -14,10 +14,10 @@ function (Marionette) {
     var App = new Backbone.Marionette.Application();
 
     App.addRegions({
-        pageRegion:   "#page-region",
-        mainRegion:   "#main-region",
+        pageRegion:   '#page-region',
+        mainRegion:   '#main-region',
         // same as:
-        // App.container = new Backbone.Marionette.Region({el:"#main"});
+        // App.container = new Backbone.Marionette.Region({el:'#main'});
     });
 
     // An init function for your main application object
@@ -54,19 +54,22 @@ function (Marionette) {
         // options.anotherThing = true; // Add more data to your options
     });
 
+
     App.on('initialize:after', function (options) {
+// require(['modules/pages/app'], function () {
         if(Backbone.history){
             // note: this is async, so the rest of the init code here will run first
-            require(["modules/rotes/app", "modules/pages/app"], function () {
+            require(['modules/rotes/app', 'modules/pages/app'], function () {
                 // Backbone.history.start();
                 // Trigger the initial route and enable HTML5 History API support
                 Backbone.history.start({ pushState: true, root: App.root });
 
-                // App.switchApp("RotesApp", {});
+                // App.switchApp('RotesApp', {});
             });
         }
 
         App.log('Initialization Finished', 'App', 2);
+// });
     });
 
     /**
@@ -94,8 +97,8 @@ function (Marionette) {
      */
     App.log = function(message, domain, level){
         if(App.debug < level) { return; }
-        if(typeof message !== "string"){
-            console.log('Fancy object in log msg, implemoent this plz', message);
+        if(typeof message !== 'string'){
+            console.log('Fancy object' + domain, message);
         } else {
             console.log((domain || false ? '('+domain+') ' : '') + message);
         }

@@ -1,15 +1,15 @@
-define(['app', 'pages_list_view', 'pages_entities_page'], function(App, View){
-  App.module('PageApp.List', function(List, App, Backbone, Marionette, $, _){
+define(['app', 'pages_list_view', 'pages_entities_page'], function (App, View) {
+  App.module('PageApp.List', function (List, App, Backbone, Marionette, $, _) {
     List.Controller = {
-      listPages: function(){
+      listPages: function() {
         var links = App.request('page:entities');
         var pages = new View.Pages({collection: links});
 
-        pages.on('brand:clicked', function(){
+        pages.on('brand:clicked', function() {
           App.trigger('pages:list');
         });
 
-        pages.on('itemview:navigate', function(childView, model){
+        pages.on('itemview:navigate', function (childView, model) {
           var trigger = model.get('navigationTrigger');
           App.trigger(trigger);
         });
@@ -17,7 +17,8 @@ define(['app', 'pages_list_view', 'pages_entities_page'], function(App, View){
         App.pageRegion.show(pages);
       },
 
-      setActivePage: function(pageUrl){
+
+      setActivePage: function(pageUrl) {
         // var links = App.request('page:entities');
         // var pageToSelect = links.find(function(page){ return page.get('url') === pageUrl; });
         // pageToSelect.select();
