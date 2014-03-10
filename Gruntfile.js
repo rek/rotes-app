@@ -97,6 +97,11 @@ module.exports = function (grunt) {
                 path: 'http://localhost:8888'
             }
         },
+        // bootstrap: {
+            // files: {
+              // 'app/styles/bootstrap.css': 'app/styles/less/manifest.less',
+            // },
+        // },
         clean: {
             dist: {
                 files: [{
@@ -143,9 +148,10 @@ module.exports = function (grunt) {
         less: {
             development: {
                 options: {
-                    paths: ['app/styles/less'], // includes path
-                    cleancss: true, // minify
-                    report: 'min', // minification results
+                    paths: [
+                        'app/styles/less',
+                        'app/bower_components/bootstrap/less'
+                    ],
                 },
                 expand: true,
                 flatten: true,
@@ -156,8 +162,13 @@ module.exports = function (grunt) {
             },
             production: {
                 options: {
-                    paths: ['app/styles/less'],
-                    yuicompress: true
+                    paths: [
+                        'app/styles/less',
+                        'app/bower_components/bootstrap/less'
+                    ],
+                    yuicompress: true,
+                    cleancss: true, // minify
+                    report: 'min', // minification results
                 },
                 expand: true,
                 flatten: true,
@@ -226,7 +237,7 @@ module.exports = function (grunt) {
         cssmin: {
             dist: {
                 files: {
-                    'build/styles/main.css': [
+                    'app/styles/main.min.css': [
                         'app/styles/*.css'
                     ]
                 }

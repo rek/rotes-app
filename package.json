@@ -1,6 +1,10 @@
 {
   "name": "rotes-app",
   "version": "0.2.0",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/rek/rotes-app.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.2",
@@ -26,7 +30,8 @@
     "grunt-svgmin": "~0.1.0",
     "grunt-concurrent": "~0.1.0",
     "matchdep": "~0.1.1",
-    "grunt-contrib-coffee": "~0.10.1"
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-include-bootstrap": "^0.1.1"
   },
   "engines": {
     "node": ">=0.8.0"

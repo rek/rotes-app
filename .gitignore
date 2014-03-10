@@ -5,6 +5,7 @@ build
 .sass-cache
 app/bower_components
 app/scripts/common/templates.js
+app/styles/*.css
 .tmp/
 *.sublime-*
 *compiled.js
