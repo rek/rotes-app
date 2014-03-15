@@ -1,25 +1,25 @@
-define(["app"], function(App){
-  App.module("Entities", function(Entities, App, Backbone, Marionette, $, _){
+define(['app'], function(App){
+  App.module('Entities', function(Entities, App, Backbone, Marionette, $, _){
     var contextName = 'Entity Rote';
     Entities.Rote = Backbone.Model.extend({
-      urlRoot: "rotes",
+      urlRoot: 'rotes',
 
       defaults: {
-        name: "",
-        slug: ""
+        name: '',
+        slug: ''
       },
 
       validate: function(attrs, options) {
         var errors = {}
     //     if (! attrs.firstName) {
-    //       errors.firstName = "can't be blank";
+    //       errors.firstName = 'can't be blank';
     //     }
     //     if (! attrs.lastName) {
-    //       errors.lastName = "can't be blank";
+    //       errors.lastName = 'can't be blank';
     //     }
     //     else{
     //       if (attrs.lastName.length < 2) {
-    //         errors.lastName = "is too short";
+    //         errors.lastName = 'is too short';
     //       }
     //     }
     //     if( ! _.isEmpty(errors)){
@@ -31,9 +31,9 @@ define(["app"], function(App){
     // Entities.configureStorage(Entities.Contact);
 
     Entities.RoteCollection = Backbone.Collection.extend({
-      url: "rotes"
+      url: 'rotes'
       // model: Entities.Contact,
-      // comparator: "firstName"
+      // comparator: 'firstName'
     });
 
     // Entities.configureStorage(Entities.ContactCollection);
@@ -41,21 +41,21 @@ define(["app"], function(App){
     var initializeRotes = function(){
       App.log('Rotes init', contextName, 1);
       // var contacts = new Entities.ContactCollection([
-        // { id: 1, firstName: "Alice", lastName: "Arten", phoneNumber: "555-0184" },
-        // { id: 2, firstName: "Bob", lastName: "Brigham", phoneNumber: "555-0163" },
-        // { id: 3, firstName: "Charlie", lastName: "Campbell", phoneNumber: "555-0129" }
+        // { id: 1, firstName: 'Alice', lastName: 'Arten', phoneNumber: '555-0184' },
+        // { id: 2, firstName: 'Bob', lastName: 'Brigham', phoneNumber: '555-0163' },
+        // { id: 3, firstName: 'Charlie', lastName: 'Campbell', phoneNumber: '555-0129' }
       // ]);
 
       // var roteCollection = new Backbone.Collection.extend({});
-      // roteCollection.on("reset", callback);
+      // roteCollection.on('reset', callback);
       var Rote = Backbone.Model.extend({});
 
       var fakeRotes = [
-          new Rote({ name: "First Rote", slug: "page-1" }),
-          new Rote({ name: "Second Rote", slug: "page-2" })
+          new Rote({ name: 'First Rote', slug: 'page-1' }),
+          new Rote({ name: 'Second Rote', slug: 'page-2' })
       ]
 
-      var fakeRote3 = new Rote({ name: "Third Rote", slug: "page-3" });
+      var fakeRote3 = new Rote({ name: 'Third Rote', slug: 'page-3' });
 
       // Entities.RoteCollection.add(fakeRote3);
 
@@ -114,15 +114,15 @@ define(["app"], function(App){
       }
     };
 
-    App.reqres.setHandler("rote:entities", function(){
+    App.reqres.setHandler('rote:entities', function(){
       return API.getRoteEntities();
     });
 
-    // App.reqres.setHandler("rote:entitie", function(id){
+    // App.reqres.setHandler('rote:entitie', function(id){
       // return API.getContactEntity(id);
     // });
 
-    // App.reqres.setHandler("contact:entity:new", function(id){
+    // App.reqres.setHandler('contact:entity:new', function(id){
       // return new Entities.Contact();
     // });
   });

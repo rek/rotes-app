@@ -1,4 +1,17 @@
-define(['app', 'modules/rotes/config'], function(App){
+define(function(require) {
+    var App = require('app');
+
+    var path = 'modules/rotes/';
+
+    requirejs.config({
+        paths: {
+            list_view       : path + 'list/list_view',
+            list_controller : path + 'list/list_controller',
+            show_view       : path + 'show/show_view',
+            show_controller : path + 'show/show_controller',
+            entities_rote   : path + 'entities/rote',
+        }
+    });
 
     // create a new module
     App.module('RotesApp', {

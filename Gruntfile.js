@@ -12,7 +12,11 @@ var mountFolder = function (connect, dir) {
 // 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
-    // load all grunt tasks
+    var banner = '/*\n<%= pkg.name %> <%= pkg.version %>';
+        banner += '- <%= pkg.description %>\n<%= pkg.repository.url %>\n';
+        banner += 'Built on <%= grunt.template.today("yyyy-mm-dd") %>\n*/\n';
+
+        // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     // configurable paths
@@ -243,19 +247,24 @@ module.exports = function (grunt) {
             }
         },
         concat: {
+            options: {
+                separator: ';\n',
+                banner: banner
+            },
             dist: {
             }
         },
         uglify: {
             options: {
-              mangle: {
-                // except: ['jQuery', 'Backbone']
-              }
+                mangle: {
+                    // except: ['jQuery', 'Backbone']
+                },
+                banner: banner,
             },
             dist: {
-                  files: {
+                files: {
                     'build/scripts/app.min.js': ['build/scripts/app.js']
-                  }
+                }
             }
         },
         htmlmin: {
@@ -278,7 +287,20 @@ module.exports = function (grunt) {
                 }
             }
         },
-
+        mocha: {
+            all: {
+                options: {
+                    log: true,
+                    reporter: 'Spec',
+                    run: false,
+                    timeout: 10000,
+                    urls: ['http://localhost:<%= connect.test.options.port %>/index.html']
+                }
+            }
+        },
+        mocha_phantomjs: {
+            all: ['app/scripts/modules/{,*/}test/*.html']
+        },
         // Put files not handled in other tasks here
         copy: {
             dist: {
@@ -326,11 +348,16 @@ module.exports = function (grunt) {
         ]);
     });
 
+    // grunt.registerTask('test', [
+    //     'clean:server',
+    //     'concurrent:test',
+    //     'connect:test',
+    //     'jasmine'
+    // ]);
+
     grunt.registerTask('test', [
-        'clean:server',
-        'concurrent:test',
         'connect:test',
-        'jasmine'
+        'mocha_phantomjs',
     ]);
 
     grunt.registerTask('build', [
